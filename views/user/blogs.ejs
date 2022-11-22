@@ -23,9 +23,21 @@
     
     <div class="container mt-3">
         <div class="row d-flex justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-3">
+                <div class="list-group">
+                    <% categories.forEach(category => { %>
+                        <a href="/blogs/category/<%= category.id %>" class="list-group-item list-group-item-action"><%= category.name %></a>
+                    <% }) %>
+                </div> 
+            </div>
+            
+            <div class="col-md-9">
                 <h1 class="h3 mb-3"> <%= title %>  </h1>
-                            
+
+                <% if (blogs.length == 0) { %>
+                    <%- include ("../inc/no-blog") %> 
+                <% } %>
+
                 <% blogs.forEach(blog => { %>
                     <a href="/blogs/<%= blog.id %>" style="text-decoration:none; color:black ">
                         <div class="card mb-3">

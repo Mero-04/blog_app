@@ -5,6 +5,25 @@ const db = require("../data/db");
 const config = require("../config");
 
 
+
+router.use("/blogs/category/:category_id", async (req,res) => {
+    const id = req.params.category_id;
+    try{
+        const [blogs, ] = await db.execute("select * from blogs where category_id=?", [id]);
+        const[categories, ] = await db.execute("select * from category");
+        res.render("user/blogs",{
+            title:"All News",
+            blogs:blogs,
+            categories:categories
+        })
+    }
+    catch(err){
+        console.log(err);
+    }
+
+})
+
+
 router.use("/blogs/:id", async (req,res)=>{
     const id = req.params.id
     try{
@@ -15,7 +34,7 @@ router.use("/blogs/:id", async (req,res)=>{
                 blog:blog[0]
             })
         }else{
-            res.redirect("/");
+            res.redirect("/blogs");
         }
     }
     catch(err){
@@ -25,12 +44,12 @@ router.use("/blogs/:id", async (req,res)=>{
 
 router.use('/blogs', async (req,res) => {
     try{
-        const[blogs, ] = await db.execute("select * from blogs where chek=1 or home=1");
-        const[category, ] = await db.execute("select * from category");
+        const[blogs, ] = await db.execute("select * from blogs where chek=1");
+        const[categories, ] = await db.execute("select * from category");
         res.render("user/blogs", {
             title: "All News",
             blogs: blogs,
-            category: category
+            categories: categories
         })
     }
     catch(err){
