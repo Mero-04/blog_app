@@ -20,64 +20,29 @@
             </ul>
         </div>
     </nav>
-
+    
     <div class="container mt-3">
         <div class="row d-flex justify-content-center">
             <div class="col-md-10">
-                <h1 class="h3 mb-3"> Blogs </h1>
-                <div class="card mb-3">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img src="/img/product03.png" class="img-fluid" alt="">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body">
-                                <h5 class="card-title"> computer programming</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, modi sint. Ut, voluptates ad eveniet minus, maiores quos earum fuga repellat officia a eius facilis commodi nemo quae voluptatem eligendi?</p>
+                <h1 class="h3 mb-3"> <%= title %>  </h1>
+                            
+                <% blogs.forEach(blog => { %>
+                    <a href="/blogs/<%= blog.id %>" style="text-decoration:none; color:black ">
+                        <div class="card mb-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="/img/<%= blog.img %> " class="img-fluid" alt="">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> <%= blog.title %> </h5>
+                                        <p class="card-text"><%= blog.text %> </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img src="/img/product06.png" class="img-fluid" alt="">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body">
-                                <h5 class="card-title"> computer programming</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, modi sint. Ut, voluptates ad eveniet minus, maiores quos earum fuga repellat officia a eius facilis commodi nemo quae voluptatem eligendi?</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img src="/img/product04.png" class="img-fluid" alt="">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body">
-                                <h5 class="card-title"> computer programming</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, modi sint. Ut, voluptates ad eveniet minus, maiores quos earum fuga repellat officia a eius facilis commodi nemo quae voluptatem eligendi?</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img src="/img/product01.png" class="img-fluid" alt="">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body">
-                                <h5 class="card-title"> computer programming</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, modi sint. Ut, voluptates ad eveniet minus, maiores quos earum fuga repellat officia a eius facilis commodi nemo quae voluptatem eligendi?</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                    </a>
+                <% }) %>
                 
             </div>
         </div>
