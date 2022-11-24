@@ -8,7 +8,7 @@ connection.connect(function(err){
     }
 
     connection.query("select * from blogs", function(err,result){
-        console.log(result);
+    
     });
 
     console.log("mysql connection success");

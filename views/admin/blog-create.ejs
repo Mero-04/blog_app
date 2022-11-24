@@ -5,8 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
-    blog create
+    <%- include ("../inc/nav")  %> 
+    <div class="container mt-5">
+        <form method="post">
+            <div class="form-group row">
+              <label for="title" class="col-sm-2 col-form-label">title</label>
+              <div class="col-sm-10">
+                <input type="title" class="form-control" name="title" id="title" placeholder="title">
+              </div>
+            </div>
+            <div class="form-group row mt-2">
+                <label for="category_id" class="col-sm-2 col-form-label">category</label>
+                <div class="col-sm-10">
+                  <select name="category_id" class="form-control" id="category_id" selected>
+                    <% categories.forEach(category => { %>
+                        <option value="<%= category.id %> "><%= category.name %> </option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+            <div class="form-group row  mt-2">
+              <label for="text" class="col-sm-2 col-form-label">Text</label>
+              <div class="col-sm-10">
+                <textarea name="text" id="text" class="form-control" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="form-group row mt-2">
+                <label for="img" class="col-sm-2 col-form-label">image</label>
+                <div class="col-sm-10">
+                  <input type="text" name="img" id="image">
+                </div>
+              </div>
+            <div class="form-group row mt-2">
+              <div class="col-sm-2">Chek</div>
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" name="chek" type="checkbox" id="chek">
+                </div>
+              </div>
+            </div>
+            <div class="form-group row mt-2">
+                <div class="col-sm-2">home</div>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" name="home" type="checkbox" id="home">
+                  </div>
+                </div>
+              </div>
+            
+                <button type="submit" class="btn btn-primary">SEND</button>
+              
+          </form>
+    
+    </div>
+      <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
