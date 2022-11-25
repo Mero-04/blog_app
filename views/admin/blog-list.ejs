@@ -12,6 +12,23 @@
 <body>
     <%- include ("../inc/nav")  %> 
     <div class="container mt-5">
+        <div class="col-md-12 mt-3">
+            <% if (action != "undefined" && action =="edit") { %>
+                <div class="alert alert-success">
+                    Blog edit edildi
+                </div>
+            <% } %>
+            <% if (action != "undefined" && action =="create") { %>
+                <div class="alert alert-success">
+                    Taze blog gosuldy
+                </div>
+            <% } %>
+            <% if (action != "undefined" && action =="delete") { %>
+                <div class="alert alert-danger">
+                    Blog udalit edildi
+                </div>
+            <% } %>
+        </div>
         <table class="table">
             <thead class="table-dark">
                 <tr>
@@ -34,8 +51,8 @@
                     <td><%= blog.chek %></td>
                     <td><%= blog.home %></td>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="/admin/blog-lists/<%= blog.id %> ">details</a>
-                        <a class="btn btn-sm btn-danger" href="/admin/delete/<%= blog.id %> ">delete</a>
+                        <a class="btn btn-sm btn-primary" href="/admin/blogs/edit/<%= blog.id %> ">details</a>
+                        <a class="btn btn-sm btn-danger" href="/admin/blogs/delete/<%= blog.id %> ">delete</a>
                     </td>
                 </tr>
                <% }) %>

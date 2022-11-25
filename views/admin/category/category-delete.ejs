@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+
+<body>
+    <%- include ("../../inc/nav")  %> 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                <div class="alert alert-secondary">
+                    <p class="mb-3">
+                        <b><%= categories.name %> </b> <br>atly categoryny ocurmek isleyanizmi??
+                    </p>
+                    <form method="post">
+                        <input type="hidden" name="id" value="<%= categories.id %> ">
+                        <button type="submit" class="btn btn-danger"> hova</button>
+                        <a href="/admin/category" class="btn btn-primary">yok</a>
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+
+</html>
