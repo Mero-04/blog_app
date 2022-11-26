@@ -3,6 +3,7 @@ const router = express.Router();
 
 const db = require("../data/db");
 const config = require("../config");
+const fs= require('fs')
 
 const imageUpload = require("../helpers/image-upload")
 
@@ -54,11 +55,20 @@ router.get('/blogs/edit/:id', async (req, res) => {
 
 });
 
-router.post('/blogs/edit/:id', async (req, res) => {
+router.post('/blogs/edit/:id', imageUpload.upload.single("img"), async (req, res) => {
     const id = req.body.id;
     const title = req.body.title;
     const text = req.body.text;
-    const img = req.body.img;
+    let img = req.body.file;
+
+    if(req.file){
+        img = req.file.filename;
+        
+        fs.unlink(".public/img/" + req.body.img, err =>{
+            console.log(err);
+        })
+    }
+
     const chek = req.body.chek == "on" ? 1 : 0;
     const home = req.body.home == "on" ? 1 : 0;
     const category_id = req.body.category_id;
