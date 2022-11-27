@@ -29,12 +29,12 @@
               <% categories.forEach(category=> { %>
 
                 <% if (category.id==blog.id) { %>
-                  <option value="<%= category.id %>" selected>
+                  <option value="<%= category.dataValues.id %>" selected>
                     <%= category.name %>
                   </option>
                   <% } else { %>
-                    <option value="<%= category.id %>">
-                      <%= category.name %>
+                    <option value="<%= category.dataValues.id %>">
+                      <%= category.dataValues.name %>
                     </option>
                     <% } %>
                       <% }) %>

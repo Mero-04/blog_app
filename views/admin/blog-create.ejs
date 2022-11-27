@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
   <style>
-    .ck-editor__editable_inline{
+    .ck-editor__editable_inline {
       min-height: 250px;
     }
   </style>
@@ -30,8 +30,8 @@
           <div class="col-sm-10">
             <select name="category_id" class="form-control" id="category_id" selected>
               <% categories.forEach(category=> { %>
-                <option value="<%= category.id %> ">
-                  <%= category.name %>
+                <option value="<%= category.dataValues.id %> ">
+                  <%= category.dataValues.name %>
                 </option>
                 <% }) %>
             </select>
@@ -79,7 +79,7 @@
         });
     </script>
     <script src="/js/bootstrap.min.js"></script>
-    
+
 </body>
 
 </html>

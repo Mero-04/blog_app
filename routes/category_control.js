@@ -4,6 +4,9 @@ const router = express.Router();
 const db = require("../data/db");
 const config = require("../config");
 
+const Blog = require("../models/blog");
+const Category = require("../models/category");
+
 router.get('/category/delete/:id', async (req,res) =>{
     const id = req.params.id;
     try{
@@ -32,11 +35,10 @@ router.post("/category/delete/:id", async (req,res) => {
 router.get('/category/edit/:id', async (req, res) => {
     const id = req.params.id;
     try {
-        const [categories, ] = await db.execute("select * from category where id=?", [id]);
-        const category = categories[0];
+        const category = await Category.findByPk(id);
         if (category) {
             return res.render('admin/category/category-edit', {
-                categories: categories[0],
+                category: category,
                 action: req.query.action
             });
         }
@@ -52,8 +54,13 @@ router.post('/category/edit/:id', async (req, res) => {
     const name = req.body.name;
 
     try {
-        await db.execute("UPDATE category SET name=? WHERE id=?", [name, id]);
-        res.redirect("/admin/category?action=edit");
+        const category = await Category.findByPk(id);
+        if(category){
+            category.name = name;
+            category.save();
+            return res.redirect("/admin/category?action=edit");
+        }
+        res.redirect("/admin/category");
     }
     catch (err) {
         console.log(err);
@@ -62,10 +69,8 @@ router.post('/category/edit/:id', async (req, res) => {
 
 router.get('/category/create', async (req, res) => {
     try {
-        const [categories,] = await db.execute("select * from category");
         res.render('admin/category/category-create', {
             title: "Blog-Creat",
-            categories: categories,
             action: req.query.action
         });
     }
@@ -79,8 +84,7 @@ router.post('/category/create', async (req, res) => {
     const name = req.body.name
 
     try {
-        await db.execute("INSERT INTO category(name) VALUES (?)",
-            [name]);
+        await Category.create({name: name});
         res.redirect("/admin/category?action=create");
     }
     catch (err) {
@@ -90,7 +94,8 @@ router.post('/category/create', async (req, res) => {
 });
 
 router.get("/category", async (req,res) =>{
-    [categories, ] = await db.execute("select * from category");
+     const categories = await Category.findAll();
+    console.log(categories);
     res.render("admin/category/category-list",{
         categories:categories,
         action: req.query.action

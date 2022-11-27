@@ -3,12 +3,18 @@ const router = express.Router();
 
 const db = require("../data/db");
 const config = require("../config");
+const Blog = require("../models/blog");
+const Category = require("../models/category");
+
 
 router.use("/blogs/category/:category_id", async (req, res) => {
     const id = req.params.category_id;
     try {
-        const [blogs,] = await db.execute("select * from blogs where category_id=?", [id]);
-        const [categories,] = await db.execute("select * from category");
+        const blogs = await Blog.findAll({where:{
+            id:id,
+            chek:true
+        }});
+        const categories = await Category.findAll();
         res.render("user/blogs", {
             title: "All News",
             blogs: blogs,
@@ -25,11 +31,11 @@ router.use("/blogs/category/:category_id", async (req, res) => {
 router.use("/blogs/:id", async (req, res) => {
     const id = req.params.id
     try {
-        const [blog] = await db.execute("select * from blogs where id=?", [id]);
-        if (blog[0]) {
+        const blog = await Blog.findByPk(id);
+        if (blog) {
             return res.render("user/blog-detail", {
                 title: "detail page",
-                blog: blog[0]
+                blog: blog
             })
         } else {
             res.redirect("/blogs");
@@ -42,8 +48,8 @@ router.use("/blogs/:id", async (req, res) => {
 
 router.use('/blogs', async (req, res) => {
     try {
-        const [blogs,] = await db.execute("select * from blogs where chek=1");
-        const [categories,] = await db.execute("select * from category");
+        const blogs = await Blog.findAll();
+        const categories = await Category.findAll();
         res.render("user/blogs", {
             title: "All News",
             blogs: blogs,
@@ -58,8 +64,13 @@ router.use('/blogs', async (req, res) => {
 
 router.use('/', async (req, res) => {
     try {
-        const [blogs] = await db.execute("select * from blogs");
-        const [categories] = await db.execute("Select * from category");
+        const blogs = await Blog.findAll({where:{
+            chek:true,
+            home:true
+        },
+        raw: true
+    });
+        const categories = await Category.findAll();
         res.render("user/index", {
             title: "Home Page",
             blogs: blogs,
