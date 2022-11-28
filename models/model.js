@@ -2,12 +2,6 @@ const {DataTypes} = require('sequelize');
 const sequelize = require("../data/db");
 
 const Blog = sequelize.define("blog", {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
     title: {
         type: DataTypes.STRING,
         allowNull: false
@@ -27,18 +21,20 @@ const Blog = sequelize.define("blog", {
     home: {
         type:DataTypes.BOOLEAN,
         allowNull:false
-    },
-    category_id: {
-        type: DataTypes.INTEGER,
-        allowNull:false
     }
 });
 
-async function sync() {
-    await Blog.sync({alter: true});
-    console.log("blog table join")
-}
+const Category = sequelize.define("category", {
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+});
 
-sync();
+Category.hasMany(Blog, { onDelete: "cascade" });
+Blog.belongsTo(Category);
 
-module.exports = Blog;
+module.exports = {
+    Blog,
+    Category
+};

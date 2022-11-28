@@ -10,8 +10,9 @@ const sequelize = new Sequelize(config.db.database, config.db.user, config.db.pa
 
 async function connect(){
     try{
+        await sequelize.sync({alter: true});
         await sequelize.authenticate();
-        console.log("server running");
+        console.log("server running and all tables sync");
     }
     catch(err) {
         console.log("error =>",err)

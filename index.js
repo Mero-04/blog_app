@@ -21,6 +21,8 @@ app.use("/admin", adminRoutes);
 app.use(userRoutes);
 
 
+
+
 app.listen(port, () => {
     console.log(`server listing on port ${port}`)
 })
