@@ -31,10 +31,29 @@ const Category = sequelize.define("category", {
     }
 });
 
+const User = sequelize.define("user", {
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    email: {
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull:false
+    }   
+}, {timeStamps: true});
+
+
+
+
 Category.hasMany(Blog, { onDelete: "cascade" });
 Blog.belongsTo(Category);
 
 module.exports = {
     Blog,
-    Category
+    Category,
+    User
 };
