@@ -1,7 +1,18 @@
+const express = require("express");
 const { User } = require("../models/model");
 const bcrypt = require('bcrypt');
-const e = require("express");
 
+
+
+exports.get_logout = async (req, res) => {
+    try {
+        res.clearCookie("isAuth")
+        return res.redirect("/account/login");
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
 
 exports.get_register = async (req, res) => {
     try {
@@ -31,6 +42,16 @@ exports.post_register = async (req, res) => {
     }
 }
 
+
+exports.get_login = async (req, res) => {
+    try {
+        res.render("auth/login");
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
 exports.post_login = async (req, res) => {
     const email = req.body.name;
     const password = req.body.password;
@@ -48,21 +69,13 @@ exports.post_login = async (req, res) => {
 
         const match = await bcrypt.compare(password, user.password)
         if (match) {
+            res.session.isAuth=1;
             res.redirect("/");
         } else {
             return res.render("auth/login", {
                 message: "password invalid"
             })
         }
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-
-exports.get_login = async (req, res) => {
-    try {
-        res.render("auth/login");
     }
     catch (err) {
         console.log(err);

@@ -68,8 +68,9 @@ exports.index = async (req, res) => {
         res.render("user/index", {
             title: "Home Page",
             blogs: blogs,
-            categories: categories
-        })
+            categories: categories,
+            isAuth: req.session.isAuth
+        });
     }
     catch (err) {
         console.log(err);
