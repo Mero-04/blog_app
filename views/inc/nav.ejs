@@ -5,7 +5,7 @@
             <li class="nav-item d-flex">
                 <a href="/" class="nav-link active">Home</a>
                 <a href="/blogs" class="nav-link">Blogs</a>
-                <% if (typeof isAuth !="undefined" && isAuth=="1" ) { %>
+                <% if (isAuth) { %>
                     <a href="/admin/blogs/create" class="nav-link">Creat</a>
                     <a href="/admin/blogs" class="nav-link">blog_list</a>
                     <a href="/admin/category" class="nav-link">Category's</a>
@@ -13,7 +13,8 @@
             </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-            <% if (typeof isAuth !="undefined" && isAuth=="1" ) { %>
+            <% if (isAuth) { %>
+                <a href="/profil" class="nav-link"><%= name %> </a>
                 <a href="/account/logout" class="nav-link">Logout</a>
             <% }else{%>
                 <a href="/account/login" class="nav-link">Login</a>

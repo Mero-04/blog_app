@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 
 exports.get_logout = async (req, res) => {
     try {
-        res.clearCookie("isAuth")
+        await req.session.destroy();
         return res.redirect("/account/login");
     }
     catch (err) {
@@ -69,8 +69,10 @@ exports.post_login = async (req, res) => {
 
         const match = await bcrypt.compare(password, user.password)
         if (match) {
-            res.session.isAuth=1;
-            res.redirect("/");
+            req.session.isAuth = true;
+            req.session.name = user.name;
+            const url = req.query.returnUrl || "/";
+            res.redirect(url);
         } else {
             return res.render("auth/login", {
                 message: "password invalid"
