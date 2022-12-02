@@ -30,6 +30,11 @@ exports.post_register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     try {
+        const user = await User.findOne({ where: { email: email } });
+        if(user){
+            req.session.message = "email has been used:)"
+            return res.redirect("login")
+        }
         await User.create({
             name: name,
             email: email,
@@ -44,8 +49,11 @@ exports.post_register = async (req, res) => {
 
 
 exports.get_login = async (req, res) => {
+    const message = req.session.message;
     try {
-        res.render("auth/login");
+        res.render("auth/login",{
+            message:message
+        });
     }
     catch (err) {
         console.log(err);

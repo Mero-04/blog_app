@@ -6,8 +6,7 @@ const port = 3000;
 
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-//download etmeli db_sessionda durya npm i connect-session-sequelize
-// const SequelizeStore = require('connect-session-sequelize')(session.store)
+const SequelizeStore = require('connect-session-sequelize')(session.Store)
 
 //routes
 const userRoutes = require("./routes/user");
@@ -29,10 +28,10 @@ app.use(session({
     seveUninitialized: false,
     cookie:{
         maxAge:1000 * 60 * 60 * 24 
-    }
-    // store:new SequelizeStore({
-    //     db:sequelize
-    // })
+    },
+    store:new SequelizeStore({
+        db:sequelize
+    })
 }));
 
 app.use(function(req,res,next){
