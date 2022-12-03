@@ -1,7 +1,8 @@
 const express = require("express");
 const { User } = require("../models/model");
 const bcrypt = require('bcrypt');
-
+const emailService = require("../helpers/send-mailer");
+const config = require("../config")
 
 
 exports.get_logout = async (req, res) => {
@@ -35,11 +36,20 @@ exports.post_register = async (req, res) => {
             req.session.message = "email has been used:)"
             return res.redirect("login")
         }
-        await User.create({
+
+        newUser = await User.create({
             name: name,
             email: email,
             password: hashedPassword
         });
+
+        emailService.sendMail({
+            from: config.email.from,
+            to: newUser.email,
+            subject: "sen akyndan register yaptim",
+            text:"kafa error verdimi yartoooooooooo"
+        })
+
         return res.redirect("login");
     }
     catch (err) {
