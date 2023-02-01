@@ -5,10 +5,16 @@ const path = require("path");
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, './public/img/');
-    },
+        if (file.fieldname === "img") {
+            cb(null, './public/uploads/img/');
+        }
+        else if (file.fieldname === "file1") {
+            cb(null, './public/uploads/sahadatnama/');
+        }
+     },
+        
     filename: function(req, file, cb){
-        cb(null, path.parse(file.originalname).name + "-" + Date.now() + path.extname(file.originalname));
+        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
     }
 });
 

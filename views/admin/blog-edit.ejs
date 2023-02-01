@@ -12,7 +12,7 @@
 <body>
   <%- include ("../inc/nav") %>
     <div class="container mt-5">
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" enctype="multipart/form-data" action="/admin/blogs/edit/<%= blog.id %>?_csrf=<%= csrfToken %>">
         <input type="hidden" name="id" value="<%= blog.id %>">
         <input type="hidden" name="img" value="<%= blog.img %>">
         <div class="form-group row">

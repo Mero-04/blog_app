@@ -113,7 +113,8 @@ exports.get_blog_create = async (req, res) => {
 exports.post_blog_create = async (req, res) => {
     const title = req.body.title;
     const text = req.body.text;
-    const img = req.file.filename;
+    const img = req.files.img[0].filename;
+    const file1 = req.files.file1[0].filename;
     const chek = req.body.chek == "on" ? 1 : 0;
     const home = req.body.home == "on" ? 1 : 0;
     const categoryId = req.body.categoryId;
@@ -123,6 +124,7 @@ exports.post_blog_create = async (req, res) => {
             title: title,
             text: text,
             img: img,
+            file1:file1,
             chek: chek,
             home: home,
             categoryId: categoryId,

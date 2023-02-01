@@ -48,7 +48,7 @@ exports.blogs_index = async (req, res) => {
             title: "All News",
             blogs: blogs,
             categories: categories
-        })
+        });
     }
     catch (err) {
         console.log(err);

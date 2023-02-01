@@ -14,6 +14,10 @@ const Blog = sequelize.define("blog", {
         type: DataTypes.STRING,
         allowNull:false
     },
+    file1: {
+        type: DataTypes.STRING,
+        allowNull:true
+    },
     chek: {
         type:DataTypes.BOOLEAN,
         allowNull:false

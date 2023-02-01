@@ -6,6 +6,7 @@ const port = 3000;
 
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const csurf = require('csurf');
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 
 //routes
@@ -14,6 +15,7 @@ const adminRoutes = require("./routes/admin");
 const categoryRouter = require("./routes/category_control");
 const authController = require("./routes/auth");
 const sequelize = require('./data/db');
+
 
 //view engine
 app.set('view engine', 'ejs');
@@ -39,6 +41,7 @@ app.use(function(req,res,next){
     res.locals.name = req.session.name;
     next();
 })
+app.use(csurf());
 
 app.use("/admin/", isAuth, categoryRouter);
 app.use("/admin", isAuth, adminRoutes);

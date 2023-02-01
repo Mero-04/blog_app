@@ -37,7 +37,7 @@ exports.post_register = async (req, res) => {
             return res.redirect("login")
         }
 
-        newUser = await User.create({
+       const newUser = await User.create({
             name: name,
             email: email,
             password: hashedPassword

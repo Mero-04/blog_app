@@ -6,8 +6,8 @@ const config = {
         database: "blog_db"
     },
     email:{
-        username: "Mergen",
-        password: "12345678",
+        username: "mmuhammedov234@gmail.com",
+        password: "Muhammedov2004",
         from: "mmuhammedov234@gmail.com"
     }
 }

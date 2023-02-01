@@ -5,7 +5,7 @@ var transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
     secureConnection:false,
     port: 587,
-    tls:{
+    tls:{ 
         ciphers: "SSLv3"
     },
     auth: {

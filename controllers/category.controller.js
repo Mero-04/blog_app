@@ -4,6 +4,7 @@ const db = require("../data/db");
 const config = require("../config");
 
 
+
 exports.get_category_delete = async (req,res) =>{
     const id = req.params.id;
     try{

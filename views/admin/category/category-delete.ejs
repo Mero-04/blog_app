@@ -19,6 +19,7 @@
                         <b><%= categories.name %> </b> <br>atly categoryny ocurmek isleyanizmi??
                     </p>
                     <form method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <input type="hidden" name="id" value="<%= categories.id %> ">
                         <button type="submit" class="btn btn-danger"> hova</button>
                         <a href="/admin/category" class="btn btn-primary">yok</a>
